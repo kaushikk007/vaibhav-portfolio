@@ -19,7 +19,7 @@
       "Sid": "CloudFrontInvalidate",
       "Effect": "Allow",
       "Action": "cloudfront:CreateInvalidation",
-      "Resource": "arn:aws:cloudfront::*:distribution/E1XL3LKHI6P5LW"
+      "Resource": "arn:aws:cloudfront::526426841937:distribution/E1XL3LKHI6P5LW"
     }
   ]
 }
