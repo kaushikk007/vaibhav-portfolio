@@ -1,0 +1,3 @@
+cloudfront_distribution_id = "E1XL3LKHI6P5LW"
+cloudfront_url = "https://d3mdrlspvap135.cloudfront.net"
+s3_bucket_name = "vaibhav-portfolio-site-6167beb4"
