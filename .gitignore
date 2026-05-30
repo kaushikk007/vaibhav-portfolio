@@ -29,3 +29,5 @@ npm-debug.log*
 *.tfstate.lock.info
 *.tfvars
 !*.tfvars.example
+
+urls.txt
