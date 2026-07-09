@@ -24,20 +24,26 @@ export const links = {
   credly: 'https://credly.com/users/vaibhav-kaushik.551d449c',
 };
 
+const credly = (uuid) =>
+  `https://images.credly.com/images/${uuid}/image.png`;
+
 export const certifications = [
-  { name: 'Solutions Architect', level: 'Professional', tier: 'pro' },
-  { name: 'DevOps Engineer', level: 'Professional', tier: 'pro' },
-  { name: 'Security', level: 'Specialty', tier: 'specialty' },
-  { name: 'Advanced Networking', level: 'Specialty', tier: 'specialty' },
-  { name: 'Machine Learning', level: 'Specialty', tier: 'specialty' },
-  { name: 'Machine Learning', level: 'Associate', tier: 'associate' },
-  { name: 'Solutions Architect', level: 'Associate', tier: 'associate' },
-  { name: 'Data Engineer', level: 'Associate', tier: 'associate' },
-  { name: 'Developer', level: 'Associate', tier: 'associate' },
-  { name: 'SysOps Administrator', level: 'Associate', tier: 'associate' },
-  { name: 'Cloud Practitioner', level: 'Foundational', tier: 'foundational' },
-  { name: 'AI Practitioner', level: 'Foundational', tier: 'foundational' },
-  { name: 'Azure AI Fundamentals', level: 'AZ-900', tier: 'other' },
+  { name: 'Solutions Architect', level: 'Professional', tier: 'pro',         badge: credly('2d84e428-9078-49b6-a804-13c15383d0de') },
+  { name: 'DevOps Engineer',     level: 'Professional', tier: 'pro',         badge: credly('bd31ef42-d460-493e-8503-39592aaf0458') },
+  { name: 'Security',            level: 'Specialty',    tier: 'specialty',   badge: credly('53acdae5-d69f-4dda-b650-d02ed7a50dd7') },
+  { name: 'Advanced Networking', level: 'Specialty',    tier: 'specialty',   badge: credly('4d08274f-64c1-495e-986b-3143f51b1371') },
+  { name: 'Machine Learning',    level: 'Specialty',    tier: 'specialty',   badge: credly('778bde6c-ad1c-4312-ac33-2fa40d50a147') },
+  { name: 'Machine Learning',    level: 'Associate',    tier: 'associate',   badge: credly('1a634b4e-3d6b-4a74-b118-c0dcb429e8d2') },
+  { name: 'Solutions Architect', level: 'Associate',    tier: 'associate',   badge: credly('0e284c3f-5164-4b21-8660-0d84737941bc') },
+  { name: 'Data Engineer',       level: 'Associate',    tier: 'associate',   badge: credly('e5c85d7f-4e50-431e-b5af-fa9d9b0596e7') },
+  { name: 'Developer',           level: 'Associate',    tier: 'associate',   badge: credly('b9feab85-1a43-4f6c-99a5-631b88d5461b') },
+  { name: 'SysOps Administrator',level: 'Associate',    tier: 'associate',   badge: credly('f0d3fbb9-bfa7-4017-9989-7bde8eaf42b1') },
+  { name: 'Cloud Practitioner',  level: 'Foundational', tier: 'foundational',badge: credly('00634f82-b07f-4bbd-a6bb-53de397fc3a6') },
+  { name: 'AI Practitioner',     level: 'Foundational', tier: 'foundational',badge: credly('4d4693bb-530e-4bca-9327-de07f3aa2348') },
+  { name: 'Cloud Digital Leader',level: 'Certification',tier: 'gcp',         badge: credly('44994cda-b5b0-44cb-9a6d-d29b57163073') },
+  { name: 'Generative AI Leader',level: 'Certification',tier: 'gcp',         badge: 'https://images.credly.com/images/ec23e41a-0f32-4a98-9c00-28925621b281/blob' },
+  { name: 'Azure AI Fundamentals',level: 'AZ-900',     tier: 'microsoft',    badge: 'https://images.credly.com/images/4136ced8-75d5-4afb-8677-40b6236e2672/azure-ai-fundamentals-600x600.png' },
+  { name: 'Azure Data Fundamentals',level: 'DP-900',   tier: 'microsoft',    badge: 'https://images.credly.com/images/70eb1e3f-d4de-4377-a062-b20fb29594ea/azure-data-fundamentals-600x600.png' },
 ];
 
 export const stack = [
