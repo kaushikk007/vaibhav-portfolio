@@ -57,8 +57,21 @@ export const stack = [
 
 export const experience = [
   {
+    company: 'Wipro',
+    role: 'DevSecOps Engineer',
+    location: 'London, UK',
+    period: 'Feb 2026 – Present',
+    highlights: [
+      "Engaged as an AWS Cloud Security Engineer for one of the UK's largest insurance enterprises, as part of Wipro's AWS delivery team",
+      'Implementing core AWS Landing Zone / Control Tower guardrails and security controls to ensure workloads migrate safely into a governed, enterprise-grade cloud foundation',
+      "Delivering IAM, data protection, secure connectivity, and logging/monitoring security building blocks aligned to the client's required security outcomes",
+      'Applying deep AWS Security expertise and multi-account governance experience to embed security-by-design across the migration programme',
+    ],
+  },
+  {
     company: 'Wipro AWS Partner Lab',
     role: 'Cloud Architect / AWS Cloud Engineer II',
+    location: 'India',
     period: 'Apr 2023 – Present',
     highlights: [
       "Sole owner of Wipro's internal AWS estate — 50+ accounts via Control Tower, Organizations, and SCPs",
@@ -71,6 +84,7 @@ export const experience = [
   {
     company: 'Wipro',
     role: 'AWS Cloud Engineer',
+    location: 'India',
     period: 'Mar 2022 – Mar 2023',
     highlights: [
       'Managed Linux production servers on EC2 with security groups and IAM least-privilege enforcement',
@@ -81,6 +95,7 @@ export const experience = [
   {
     company: 'Capgemini',
     role: 'Analyst I',
+    location: 'India',
     period: 'Jul 2021 – Mar 2022',
     highlights: [
       'Developed C++ solutions and worked on SIP protocol call flows',

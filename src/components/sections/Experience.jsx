@@ -13,14 +13,17 @@ export default function Experience() {
       <div className="space-y-0">
         {experience.map((job, idx) => (
           <div
-            key={job.company}
+            key={`${job.company}-${job.period}`}
             className="grid md:grid-cols-[240px_1fr] gap-0 border-t border-border last:border-b"
           >
             {/* Left: metadata */}
             <div className="py-8 md:pr-8 flex flex-col justify-start">
               <p className="font-display font-semibold text-white text-base mb-1">{job.company}</p>
               <p className="font-mono text-xs text-accent mb-2">{job.role}</p>
-              <p className="font-mono text-xs text-muted">{job.period}</p>
+              <p className="font-mono text-xs text-muted mb-1">{job.period}</p>
+              {job.location && (
+                <p className="font-mono text-xs text-subtle">{job.location}</p>
+              )}
               <div className="mt-3">
                 <span className="font-mono text-xs text-subtle border border-subtle px-2 py-0.5">
                   0{idx + 1}
