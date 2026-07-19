@@ -72,7 +72,7 @@ export const experience = [
     company: 'Wipro AWS Partner Lab',
     role: 'Cloud Architect / AWS Cloud Engineer II',
     location: 'India',
-    period: 'Apr 2023 – Present',
+    period: 'Apr 2023 – Jan 2026',
     highlights: [
       "Sole owner of Wipro's internal AWS estate — 50+ accounts via Control Tower, Organizations, and SCPs",
       'Co-developed and published AWS Control Tower Network Security on the AWS Partner Solutions Finder',
