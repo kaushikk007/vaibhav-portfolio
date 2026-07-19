@@ -145,7 +145,7 @@ export default function Hero() {
               {/* Orange border ring */}
               <div className="absolute inset-0 rounded-full border-2 border-accent/40" />
               <img
-                src="/IMG_7460.jpg"
+                src="/profile-photo.png"
                 alt={profile.name}
                 className="relative w-full h-full rounded-full object-cover object-top border-2 border-accent/20"
               />
