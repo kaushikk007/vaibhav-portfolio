@@ -12,6 +12,7 @@ const navItems = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -19,9 +20,26 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+
+    navItems.forEach((item) => {
+      const el = document.getElementById(item.href.slice(1));
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 animate-nav-drop transition-colors duration-300 ${
         scrolled ? 'bg-bg/90 backdrop-blur-md border-b border-border' : 'bg-transparent'
       }`}
     >
@@ -33,16 +51,23 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <li key={item.label}>
-              <a
-                href={item.href}
-                className="font-body text-sm text-muted hover:text-white transition-colors duration-200"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activeSection === item.href.slice(1);
+            return (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  className={`relative font-body text-sm transition-colors duration-200 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:h-[1.5px] after:bg-accent after:transition-all after:duration-300 ${
+                    isActive
+                      ? 'text-accent after:w-full'
+                      : 'text-muted hover:text-white after:w-0 hover:after:w-full'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         {/* CTA */}

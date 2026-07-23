@@ -1,5 +1,7 @@
 import { links } from '../../data/profile';
 import { Play, Link, FileText, BookOpen } from 'lucide-react';
+import Reveal from '../layout/Reveal';
+import useTilt from '../../hooks/useTilt';
 
 const platforms = [
   {
@@ -40,48 +42,60 @@ const platforms = [
   },
 ];
 
+function PlatformCard({ p, delay }) {
+  const tilt = useTilt(6);
+  const Icon = p.icon;
+
+  return (
+    <Reveal delay={delay} variant="scale">
+      <a
+        ref={tilt.ref}
+        onMouseMove={tilt.onMouseMove}
+        onMouseLeave={tilt.onMouseLeave}
+        href={p.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group block h-full border p-6 transition-all duration-200 will-change-transform hover:shadow-[0_0_30px_-8px_rgba(249,115,22,0.25)] ${p.color}`}
+      >
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <Icon size={20} />
+            <div>
+              <p className="font-display font-semibold text-white text-sm">{p.name}</p>
+              <p className="font-mono text-xs text-muted">@{p.handle}</p>
+            </div>
+          </div>
+          <span className="font-mono text-xs text-muted group-hover:translate-x-1 transition-transform">→</span>
+        </div>
+        <p className="font-body text-gray-400 text-sm leading-relaxed mb-4">{p.description}</p>
+        <p className="font-mono text-xs text-muted">{p.stats}</p>
+      </a>
+    </Reveal>
+  );
+}
+
 export default function Content() {
   return (
     <section id="content" className="bg-surface border-t border-border">
       <div className="max-w-6xl mx-auto px-6 py-14">
-        <p className="font-mono text-xs text-accent tracking-widest uppercase mb-4">
-          05 / Content
-        </p>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
-          <h2 className="font-display text-4xl font-bold text-white">
-            Where I teach.
-          </h2>
-          <p className="font-body text-muted text-sm max-w-xs">
-            Helping cloud and DevOps engineers build real skills, crack certifications, and grow their careers.
+        <Reveal>
+          <p className="font-mono text-xs text-accent tracking-widest uppercase mb-4">
+            05 / Content
           </p>
-        </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
+            <h2 className="font-display text-4xl font-bold text-white">
+              Where I teach.
+            </h2>
+            <p className="font-body text-muted text-sm max-w-xs">
+              Helping cloud and DevOps engineers build real skills, crack certifications, and grow their careers.
+            </p>
+          </div>
+        </Reveal>
 
         <div className="grid md:grid-cols-2 gap-4">
-          {platforms.map((p) => {
-            const Icon = p.icon;
-            return (
-              <a
-                key={p.name}
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group border p-6 transition-all duration-200 ${p.color}`}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <Icon size={20} />
-                    <div>
-                      <p className="font-display font-semibold text-white text-sm">{p.name}</p>
-                      <p className="font-mono text-xs text-muted">@{p.handle}</p>
-                    </div>
-                  </div>
-                  <span className="font-mono text-xs text-muted group-hover:translate-x-1 transition-transform">→</span>
-                </div>
-                <p className="font-body text-gray-400 text-sm leading-relaxed mb-4">{p.description}</p>
-                <p className="font-mono text-xs text-muted">{p.stats}</p>
-              </a>
-            );
-          })}
+          {platforms.map((p, idx) => (
+            <PlatformCard key={p.name} p={p} delay={idx * 100} />
+          ))}
         </div>
       </div>
     </section>

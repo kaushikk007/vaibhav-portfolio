@@ -1,6 +1,11 @@
 output "cloudfront_url" {
-  description = "Live site URL"
+  description = "CloudFront default domain (fallback)"
   value       = "https://${aws_cloudfront_distribution.site.domain_name}"
+}
+
+output "site_url" {
+  description = "Live site URL on custom domain"
+  value       = "https://www.vaibhavkaushik.com"
 }
 
 output "s3_bucket_name" {

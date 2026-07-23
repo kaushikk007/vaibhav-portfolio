@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import useInView from '../../hooks/useInView';
 
 const lines = [
   { type: 'cmd',    text: 'whoami' },
@@ -20,17 +21,18 @@ const lines = [
 const DELAYS = { cmd: 700, out: 160, spacer: 80, cursor: 0 };
 
 export default function Terminal() {
+  const [ref, inView] = useInView({ threshold: 0.3 });
   const [visibleCount, setVisibleCount] = useState(0);
 
   useEffect(() => {
-    if (visibleCount >= lines.length) return;
+    if (!inView || visibleCount >= lines.length) return;
     const delay = DELAYS[lines[visibleCount].type] ?? 200;
     const t = setTimeout(() => setVisibleCount((c) => c + 1), delay);
     return () => clearTimeout(t);
-  }, [visibleCount]);
+  }, [inView, visibleCount]);
 
   return (
-    <section className="max-w-6xl mx-auto px-6 pt-4 pb-8">
+    <section ref={ref} className="max-w-6xl mx-auto px-6 pt-4 pb-8">
       <div className="border border-border bg-surface overflow-hidden">
         {/* Title bar */}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-bg">

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { profile, links } from '../../data/profile';
-import { ArrowRight, MapPin, Download } from 'lucide-react';
+import { ArrowRight, MapPin, Download, ChevronDown } from 'lucide-react';
+import useParallax from '../../hooks/useParallax';
+import useTilt from '../../hooks/useTilt';
 
 const stats = [
   { end: 13, suffix: '×', label: 'AWS Certified' },
@@ -75,6 +77,11 @@ function TypewriterTagline({ text }) {
 }
 
 export default function Hero() {
+  const gridOffset = useParallax(0.12);
+  const glowOffset = useParallax(0.28);
+  const glowOffset2 = useParallax(0.18);
+  const photoTilt = useTilt(10);
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       {/* Grid background */}
@@ -86,20 +93,30 @@ export default function Hero() {
             linear-gradient(90deg, rgba(249,115,22,0.6) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
+          transform: `translateY(${gridOffset}px)`,
         }}
       />
 
       {/* Radial glow */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+      <div
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none"
+        style={{ transform: `translateY(${glowOffset}px)` }}
+      />
+      <div
+        className="absolute bottom-0 right-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none"
+        style={{ transform: `translateY(${-glowOffset2}px)` }}
+      />
 
       <div className="relative max-w-6xl mx-auto px-6 pt-32 pb-14 w-full">
         <div className="flex flex-col md:flex-row md:items-center md:gap-16">
 
           {/* Left — text content */}
           <div className="flex-1">
-            <h1 className="font-display text-5xl md:text-7xl font-bold text-white leading-tight mb-4 opacity-0 animate-fade-up animate-delay-100">
+            <h1 className="font-display text-5xl md:text-7xl font-bold text-white leading-tight mb-4 opacity-0 animate-fade-up-bold animate-delay-100">
               Cloud{' '}
-              <span className="text-accent">Architect.</span>
+              <span className="bg-gradient-to-r from-accent via-orange-200 to-accent bg-[length:200%_auto] bg-clip-text text-transparent animate-text-shimmer">
+                Architect.
+              </span>
               <br />
               <span className="text-white/60">Infrastructure</span> Engineer.
             </h1>
@@ -114,7 +131,7 @@ export default function Hero() {
             <div className="flex flex-wrap gap-4 mb-20 opacity-0 animate-fade-up animate-delay-400">
               <a
                 href="#experience"
-                className="inline-flex items-center gap-2 bg-accent text-bg font-mono font-semibold text-sm px-6 py-3 hover:bg-accent-muted transition-colors"
+                className="inline-flex items-center gap-2 bg-accent text-bg font-mono font-semibold text-sm px-6 py-3 hover:bg-accent-muted hover:shadow-[0_0_30px_-6px_rgba(249,115,22,0.7)] transition-all duration-300"
               >
                 View My Work <ArrowRight size={16} />
               </a>
@@ -127,7 +144,7 @@ export default function Hero() {
                 LinkedIn Profile
               </a>
               <a
-                href="/Vaibhav_Kaushik_CloudArchitect_CV .pdf"
+                href="/Vaibhav_Kaushik_CloudArchitect_CV_Updated.pdf"
                 download
                 className="inline-flex items-center gap-2 border border-border text-muted font-mono text-sm px-6 py-3 hover:border-accent hover:text-white transition-colors"
               >
@@ -138,17 +155,24 @@ export default function Hero() {
           </div>
 
           {/* Right — photo */}
-          <div className="flex-shrink-0 flex justify-center md:justify-end opacity-0 animate-fade-up animate-delay-200 mb-12 md:mb-0">
-            <div className="relative w-64 h-64 md:w-80 md:h-80">
-              {/* Glow ring */}
-              <div className="absolute inset-0 rounded-full bg-accent/20 blur-2xl scale-110" />
-              {/* Orange border ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-accent/40" />
-              <img
-                src="/profile-photo.png"
-                alt={profile.name}
-                className="relative w-full h-full rounded-full object-cover object-top border-2 border-accent/20"
-              />
+          <div className="flex-shrink-0 flex justify-center md:justify-end opacity-0 animate-fade-up-bold animate-delay-200 mb-12 md:mb-0">
+            <div className="animate-float">
+              <div
+                ref={photoTilt.ref}
+                onMouseMove={photoTilt.onMouseMove}
+                onMouseLeave={photoTilt.onMouseLeave}
+                className="relative w-64 h-64 md:w-80 md:h-80 transition-transform duration-200 ease-out will-change-transform"
+              >
+                {/* Glow ring */}
+                <div className="absolute inset-0 rounded-full bg-accent/20 blur-2xl scale-110" />
+                {/* Orange border ring */}
+                <div className="absolute inset-0 rounded-full border-2 border-accent/40" />
+                <img
+                  src="/profile-photo.png"
+                  alt={profile.name}
+                  className="relative w-full h-full rounded-full object-cover object-top border-2 border-accent/20"
+                />
+              </div>
             </div>
           </div>
 
@@ -165,6 +189,16 @@ export default function Hero() {
             </div>
           ))}
         </div>
+
+        {/* Scroll cue */}
+        <a
+          href="#about"
+          aria-label="Scroll to About section"
+          className="hidden md:flex flex-col items-center gap-1 absolute left-1/2 -translate-x-1/2 bottom-2 text-muted hover:text-accent transition-colors opacity-0 animate-fade-in animate-delay-500"
+        >
+          <span className="font-mono text-[10px] tracking-widest uppercase">Scroll</span>
+          <ChevronDown size={16} className="animate-bounce" />
+        </a>
       </div>
     </section>
   );

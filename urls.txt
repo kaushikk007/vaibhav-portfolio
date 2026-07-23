@@ -1,3 +1,7 @@
 cloudfront_distribution_id = "E1XL3LKHI6P5LW"
 cloudfront_url = "https://d3mdrlspvap135.cloudfront.net"
 s3_bucket_name = "vaibhav-portfolio-site-6167beb4"
+alb_dns_name = "http://vaibhav-portfolio-alb-984319289.eu-west-2.elb.amazonaws.com"
+ecr_repository_url = "526426841937.dkr.ecr.eu-west-2.amazonaws.com/vaibhav-portfolio"
+ecs_cluster_name = "vaibhav-portfolio"
+ecs_service_name = "vaibhav-portfolio"
