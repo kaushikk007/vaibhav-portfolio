@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { certifications, links } from '../../data/profile';
 import { ExternalLink } from 'lucide-react';
+import Reveal from '../layout/Reveal';
+import useTilt from '../../hooks/useTilt';
 
 const tierConfig = {
   pro:          { label: 'Professional',  color: 'border-orange-400/30 bg-orange-400/5',  dot: 'bg-orange-400',  text: 'text-orange-300' },
@@ -15,14 +17,18 @@ const tierOrder = ['pro', 'specialty', 'associate', 'foundational', 'gcp', 'micr
 
 function BadgeCard({ cert }) {
   const [imgFailed, setImgFailed] = useState(false);
+  const tilt = useTilt(8);
   const tier = tierConfig[cert.tier];
 
   return (
     <a
+      ref={tilt.ref}
+      onMouseMove={tilt.onMouseMove}
+      onMouseLeave={tilt.onMouseLeave}
       href={links.credly}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group flex flex-col items-center gap-4 p-5 border rounded-lg ${tier.color} hover:border-accent/50 hover:bg-surface transition-all duration-200`}
+      className={`group flex flex-col items-center gap-4 p-5 border rounded-lg ${tier.color} hover:border-accent/50 hover:bg-surface hover:shadow-[0_0_25px_-8px_rgba(249,115,22,0.35)] transition-all duration-200 will-change-transform`}
     >
       {/* Badge image */}
       <div className="w-24 h-24 flex items-center justify-center flex-shrink-0">
@@ -67,22 +73,24 @@ export default function Certifications() {
 
   return (
     <section id="certifications" className="max-w-6xl mx-auto px-6 py-24">
-      <p className="font-mono text-xs text-accent tracking-widest uppercase mb-4">
-        04 / Certifications
-      </p>
-      <div className="flex items-end justify-between mb-12">
-        <h2 className="font-display text-4xl font-bold text-white">
-          17 Cloud Certifications.
-        </h2>
-        <a
-          href={links.credly}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-1.5 font-mono text-xs text-muted hover:text-accent transition-colors"
-        >
-          Verify on Credly <ExternalLink size={12} />
-        </a>
-      </div>
+      <Reveal>
+        <p className="font-mono text-xs text-accent tracking-widest uppercase mb-4">
+          04 / Certifications
+        </p>
+        <div className="flex items-end justify-between mb-12">
+          <h2 className="font-display text-4xl font-bold text-white">
+            17 Cloud Certifications.
+          </h2>
+          <a
+            href={links.credly}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex items-center gap-1.5 font-mono text-xs text-muted hover:text-accent transition-colors"
+          >
+            Verify on Credly <ExternalLink size={12} />
+          </a>
+        </div>
+      </Reveal>
 
       <div className="space-y-12">
         {/* AWS tiers — full width */}
@@ -91,7 +99,7 @@ export default function Certifications() {
           .map(({ tier, certs }) => {
             const cfg = tierConfig[tier];
             return (
-              <div key={tier}>
+              <Reveal key={tier}>
                 <div className="flex items-center gap-3 mb-5">
                   <span className={`w-2 h-2 rounded-full ${cfg.dot}`} />
                   <h3 className={`font-mono text-sm font-semibold ${cfg.text}`}>{cfg.label}</h3>
@@ -99,9 +107,13 @@ export default function Certifications() {
                   <div className="flex-1 h-px bg-border" />
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
-                  {certs.map((cert, idx) => <BadgeCard key={idx} cert={cert} />)}
+                  {certs.map((cert, idx) => (
+                    <Reveal key={idx} variant="scale" delay={idx * 40}>
+                      <BadgeCard cert={cert} />
+                    </Reveal>
+                  ))}
                 </div>
-              </div>
+              </Reveal>
             );
           })}
 
@@ -111,10 +123,10 @@ export default function Certifications() {
             {['gcp', 'microsoft']
               .map((tier) => grouped.find((g) => g.tier === tier))
               .filter(Boolean)
-              .map(({ tier, certs }) => {
+              .map(({ tier, certs }, groupIdx) => {
                 const cfg = tierConfig[tier];
                 return (
-                  <div key={tier}>
+                  <Reveal key={tier} delay={groupIdx * 100}>
                     <div className="flex items-center gap-3 mb-5">
                       <span className={`w-2 h-2 rounded-full ${cfg.dot}`} />
                       <h3 className={`font-mono text-sm font-semibold ${cfg.text}`}>{cfg.label}</h3>
@@ -122,9 +134,13 @@ export default function Certifications() {
                       <div className="flex-1 h-px bg-border" />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
-                      {certs.map((cert, idx) => <BadgeCard key={idx} cert={cert} />)}
+                      {certs.map((cert, idx) => (
+                        <Reveal key={idx} variant="scale" delay={idx * 40}>
+                          <BadgeCard cert={cert} />
+                        </Reveal>
+                      ))}
                     </div>
-                  </div>
+                  </Reveal>
                 );
               })}
           </div>

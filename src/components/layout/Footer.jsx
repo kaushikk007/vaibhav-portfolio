@@ -1,4 +1,5 @@
 import { links } from '../../data/profile';
+import Reveal from './Reveal';
 
 const footerLinks = [
   { label: 'LinkedIn', href: links.linkedin },
@@ -12,7 +13,7 @@ const footerLinks = [
 export default function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <Reveal className="max-w-6xl mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <p className="font-mono text-accent font-semibold text-sm tracking-widest uppercase mb-1">
@@ -30,7 +31,7 @@ export default function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-body text-sm text-muted hover:text-accent transition-colors"
+                className="font-body text-sm text-muted hover:text-accent hover:-translate-y-0.5 inline-block transition-all duration-200"
               >
                 {link.label}
               </a>
@@ -43,7 +44,7 @@ export default function Footer() {
             Built by a Cloud Architect, not a developer.
           </p>
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

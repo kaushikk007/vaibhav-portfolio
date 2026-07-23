@@ -1,6 +1,7 @@
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import CursorGlow from './components/layout/CursorGlow';
+import ScrollProgress from './components/layout/ScrollProgress';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Experience from './components/sections/Experience';
@@ -13,6 +14,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-bg text-white">
       <CursorGlow />
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />

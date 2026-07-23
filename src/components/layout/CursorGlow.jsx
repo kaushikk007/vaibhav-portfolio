@@ -13,7 +13,7 @@ export default function CursorGlow() {
     <div
       className="pointer-events-none fixed inset-0 z-50"
       style={{
-        background: `radial-gradient(600px circle at ${pos.x}px ${pos.y}px, rgba(249,115,22,0.07), transparent 40%)`,
+        background: `radial-gradient(650px circle at ${pos.x}px ${pos.y}px, rgba(249,115,22,0.09), transparent 40%)`,
       }}
     />
   );
